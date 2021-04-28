@@ -1,6 +1,6 @@
 
 # News Analyzer
-Author: Lin Cheng
+Author: Lin Cheng, Yuhan Hu
 
 ## Product Mission
 Ingest and discover content to help journalist investigate stories
