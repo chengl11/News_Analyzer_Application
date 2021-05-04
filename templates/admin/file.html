@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin/component/pear/css/pear.css') }}" />
+
+</head>
+<body class="pear-container">
+	<div class="layui-card">
+		<div class="layui-card-body">
+			<table id="dataTable" lay-filter="dataTable"></table>
+		</div>
+	</div>
+
+	<script type="text/html" id="toolbar">
+		<button class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+			<i class="layui-icon layui-icon-add-1"></i>
+			add
+		</button>
+		<button class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+			<i class="layui-icon layui-icon-delete"></i>
+			delete
+		</button>
+	</script>
+
+	<script type="text/html" id="user-bar">
+		<button class="pear-btn pear-btn-primary pear-btn-sm" lay-event="download"><i class="layui-icon layui-icon-download-circle"></i></button>
+		<button class="pear-btn pear-btn-primary pear-btn-sm" lay-event="convertPdfToText"><i class="layui-icon layui-icon-file"></i></button>
+		<button class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i></button>
+	</script>
+<script src="{{ url_for('static', filename='admin/component/layui/layui.js') }}"></script>
+        <script src="{{ url_for('static', filename='admin/component/pear/pear.js') }}"></script>
+    <script>
+        layui.use(['table', 'form', 'jquery'], function() {
+    let table = layui.table;
+    let form = layui.form;
+    let $ = layui.jquery;
+    let cols = [
+        [{
+                type: 'checkbox'
+            },
+            {
+                field: 'id',
+                 title: 'ID',
+                 sort: true,
+                 align: 'center',
+                 unresize: true,
+                 width: 80
+            },{
+                field: 'name',
+                title: 'name',
+                unresize: true,
+                align: 'center'
+            },{
+                field: 'mime',
+                title: 'mime',
+                unresize: true,
+                align: 'center'
+            },{
+                field: 'size',
+                title: 'size',
+                unresize: true,
+                align: 'center'
+            },{
+				field: 'ext',
+				title: 'suffix',
+				unresize: true,
+				align: 'center'
+			},{
+                field: 'create_time',
+                title: 'create time',
+                unresize: true,
+                align: 'center'
+            },{
+                title: 'operation',
+                toolbar: '#user-bar',
+                align: 'center',
+                unresize: true,
+                width: 200
+            }
+        ]
+    ]
+
+    table.render({
+        elem: '#dataTable',
+        url: 'table',
+        page: true,
+        cols: cols,
+        skin: 'line',
+        toolbar: '#toolbar',
+        defaultToolbar: [{
+            layEvent: 'refresh',
+            icon: 'layui-icon-refresh',
+        }, 'filter']
+    });
+
+    table.on('tool(dataTable)', function(obj) {
+         if (obj.event === 'remove') {
+            window.remove(obj);
+        } else if (obj.event === 'convertPdfToText') {
+			 window.convertPdfToText(obj);
+		 }else if (obj.event === 'download') {
+            window.download(obj);
+        }
+    });
+
+    table.on('toolbar(dataTable)', function(obj) {
+        if (obj.event === 'add') {
+            window.add();
+        } else if (obj.event === 'refresh') {
+            window.refresh();
+        } else if (obj.event === 'batchRemove') {
+            window.batchRemove(obj);
+        }
+    });
+    if (typeof width !== 'number' || width === 0) {
+        width = $(window).width() * 0.8;
+    }
+    if (typeof height !== 'number' || height === 0) {
+        height = $(window).height() - 20;
+    }
+    window.add = function() {
+        layer.open({
+            type: 2,
+            maxmin: true,
+            title: 'upload file',
+            shade: 0.1,
+            area: [width + 'px', height + 'px'],
+            content:'upload'
+        });
+    }
+
+    window.remove = function(obj) {
+        layer.confirm('are you sure delete file?', {
+            icon: 3,
+            title: 'hint'
+        }, function(index) {
+            layer.close(index);
+            let loading = layer.load();
+            $.ajax({
+                url:'delete',
+                data:{id:obj.data['id']},
+                dataType: 'json',
+                type: 'POST',
+                success: function(res) {
+                    layer.close(loading);
+                    if (res.code==200) {
+                        layer.msg(res.msg, {
+                            icon: 1,
+                            time: 1000
+                        }, function() {
+                            obj.del();
+                        });
+                    } else {
+                        layer.msg(res.msg, {
+                            icon: 2,
+                            time: 1000
+                        });
+                    }
+                }
+            })
+        });
+    }
+
+    window.batchRemove = function(obj) {
+        let data = table.checkStatus(obj.config.id).data;
+        if (data.length === 0) {
+            layer.msg("no files has been seleted", {
+                icon: 3,
+                time: 1000
+            });
+            return false;
+        }
+        var ids = []
+        var hasCheck = table.checkStatus('dataTable')
+        var hasCheckData = hasCheck.data
+        if (hasCheckData.length > 0) {
+            $.each(hasCheckData, function (index, element) {
+                ids.push(element.id)
+            })
+        }
+        layer.confirm('are you sure delete files?', {
+            icon: 3,
+            title: 'hint'
+        }, function(index) {
+            layer.close(index);
+            let loading = layer.load();
+            $.ajax({
+                url:"{{ url_for('adminFile.batchRemove') }}",
+                data:{ids:ids},
+                dataType: 'json',
+                type: 'POST',
+                success: function(res) {
+                    layer.close(loading);
+                    if (res.code==200) {
+                        layer.msg(res.msg, {
+                            icon: 1,
+                            time: 1000
+                        }, function() {
+                            table.reload('dataTable');
+                        });
+                    } else {
+                        layer.msg(res.msg, {
+                            icon: 2,
+                            time: 1000
+                        });
+                    }
+                }
+            })
+        });
+    }
+
+    window.refresh = function() {
+        table.reload('dataTable');
+    }
+    window.download = function(obj){
+       if(!obj.data.href || obj.data.href ==""){
+			layer.msg("download url is error！");
+			return ;
+		}
+		var tempwindow=window.parent.open('_blank');
+        tempwindow.location=obj.data.href;
+    };
+
+	window.convertPdfToText = function(obj){
+		if(!obj.data.ext || obj.data.ext =="" || obj.data.ext !=".pdf"){
+			layer.msg("only support pdf file！");
+			return ;
+		}
+		let loading = layer.load();
+		$.ajax({
+			url:"{{ url_for('adminFile.convertToText') }}",
+			type:"POST",
+			data:{id:obj.data['id']},
+			success:function (res){
+				layer.close(loading);
+				if (res.code==200) {
+					var index = layer.open({
+						type:1,
+						title:"pdf text content",
+						area: ['800px', '400px'],
+						content:'<div style="width: 100%; height: 100%">\n' +
+								'      <textarea placeholder="" class="layui-textarea" style="width: 100%; height: 100%">'+res.data.text+'</textarea>\n' +
+								'    </div>',
+						scrollbar:false,
+						shadeClose:true,
+						zIndex: layer.zIndex,
+						success: function(layero){
+						layer.setTop(layero);
+						}
+					});
+				} else {
+					layer.msg(res.msg, {
+						icon: 2,
+						time: 1000
+					});
+				}
+
+			},
+			error:function(){
+				layer.close(loading);
+				layer.msg("server error！", {
+					icon: 2,
+					time: 1000
+				});
+			}
+		})
+	};
+
+})
+    </script>

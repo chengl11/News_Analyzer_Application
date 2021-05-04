@@ -1,0 +1,44 @@
+---
+logo:
+  title: ""
+  image: ""
+menu:
+  data: "/admin/menu"
+  accordion: true
+  control: false
+  select: "10"
+  async: true
+tab:
+  muiltTab: true
+  keepState: true
+  session: true
+  tabMax: "30"
+  index:
+    id: "10"
+    href: "/admin/welcome"
+    title: "home page"
+theme:
+  defaultColor: "2"
+  defaultMenu: "dark-theme"
+  allowCustom: false
+colors: 
+- id: "1"
+  color: "#2d8cf0"
+- id: "2"
+  color: "#36b368"
+- id: "3"
+  color: "#f6ad55"
+- id: "4"
+  color: "#f56c6c"
+- id: "5"
+  color: "darkgray"
+links: 
+- icon: "layui-icon layui-icon-website"
+  title: "官方网站"
+  href: "https://www.layui.com/"
+- icon: "layui-icon layui-icon-read"
+  title: "开发文档"
+  href: "https://www.layui.com/doc/"
+other:
+  keepLoad: "1200"
+  autoHead: false

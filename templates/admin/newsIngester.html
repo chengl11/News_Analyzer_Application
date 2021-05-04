@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>news feed ingester</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin/component/pear/css/pear.css') }}" />
+</head>
+
+<body>
+
+    <div class="mainBox">
+        <div class="main-container">
+        <form class="layui-form" action="">
+            <div class="main-container">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">url</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="url" required lay-verify="required" placeholder="url" autocomplete="off" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">rule</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="rule" required lay-verify="required" placeholder="rule" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+            </div>
+            <div class="button-container">
+                <button type="submit" class="layui-btn layui-btn-normal layui-btn-sm" lay-submit="" lay-filter="newsIngester-ingest">
+                    <i class="layui-icon layui-icon-ok"></i>
+                    commit
+                </button>
+                <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">
+                    <i class="layui-icon layui-icon-refresh"></i>
+                    reset
+                </button>
+            </div>
+        </form>
+        </div>
+        <div class="container" style="margin: 80px 30px 30px 30px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">result</label>
+                <div class="layui-input-block" style="width: 600px; height: 400px">
+                    <textarea id="ingest-result" readonly placeholder="" im class="layui-textarea" style="width: 100%; height: 100%"></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<script src="{{ url_for('static', filename='admin/component/layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/component/pear/pear.js') }}"></script>
+<script>
+    layui.use(['form', 'jquery'], function() {
+        let form = layui.form;
+        let $ = layui.jquery;
+
+        form.on('submit(newsIngester-ingest)', function(data) {
+            $.ajax({
+                data: data.field,
+                dataType: 'json',
+                type: 'post',
+                url: '/admin/newsIngester/ingest',
+                success: function(res) {
+                    if(res && res.code==999){
+                        layer.msg(res.msg, {
+                            icon: 5,
+                            time: 2000,
+                        })
+                        return false;
+                    }else if(res.code==200){
+                        $("#ingest-result").text(res.data);
+                    }else{
+                        layer.msg(res.msg,{icon:2,time:1000});
+                    }
+                }
+            })
+            return false;
+        });
+    })
+</script>
+</body>
+
+</html>

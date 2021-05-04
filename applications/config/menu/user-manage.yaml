@@ -1,0 +1,9 @@
+data:
+    id: 1
+    title: user manage
+    type: 1
+    icon: layui-icon layui-icon-console
+    openType: _iframe
+    href: '/admin/user'
+
+

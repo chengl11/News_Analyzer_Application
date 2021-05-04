@@ -1,0 +1,10 @@
+data:
+    id: 2
+    title: file manage
+    type: 1
+    icon: layui-icon layui-icon-console
+    openType: _iframe
+    href: "/admin/file"
+
+
+
