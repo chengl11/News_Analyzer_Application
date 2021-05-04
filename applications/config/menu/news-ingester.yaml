@@ -1,0 +1,7 @@
+data:
+  id: 3
+  title: news feed ingester
+  type: 1
+  icon: layui-icon layui-icon-console
+  openType: _iframe
+  href: "/admin/newsIngester"

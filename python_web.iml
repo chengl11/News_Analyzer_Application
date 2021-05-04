@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="django" name="Django">
+      <configuration>
+        <option name="rootFolder" value="$MODULE_DIR$/venv/lib/python3.9/site-packages/pdfminer" />
+        <option name="settingsModule" value="settings.py" />
+        <option name="manageScript" value="manage.py" />
+        <option name="environment" value="&lt;map/&gt;" />
+        <option name="doNotUseTestRunner" value="false" />
+        <option name="trackFilePattern" value="migrations" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="renderExternalDocumentation" value="true" />
+  </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Django" />
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/r" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/go" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/css" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/ecl" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/gfm" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/lua" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/php" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/rpm/spec" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/rpm/changes" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/rst" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/xml" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/diff" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/less" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/perl" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/ruby" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/rust" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/stex" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/yaml" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/clike" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/mysql" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/plsql" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/groovy" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/jinja2" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/pascal" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/python" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/scheme" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/smarty" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/sparql" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/xquery" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/xquery/test" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/clojure" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/haskell" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/verilog" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/xmlpure" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/markdown" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/ntriples" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/vbscript" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/velocity" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/htmlmixed" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/smalltalk" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/javascript" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/properties" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/tiddlywiki" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/coffeescript" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/static/codemirror/mode/htmlembedded" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/templates" />
+        <option value="$MODULE_DIR$/venv/lib/python3.9/site-packages/flask_debugtoolbar/templates/panels" />
+      </list>
+    </option>
+  </component>
+</module>

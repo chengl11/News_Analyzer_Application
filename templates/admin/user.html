@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>user manage</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='/admin/component/pear/css/pear.css') }}" />
+	</head>
+	<body class="pear-container">
+		<div class="layui-card">
+			<div class="layui-card-body">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<div class="layui-form-item layui-inline">
+							<label class="layui-form-label">user name</label>
+							<div class="layui-input-inline">
+								<input type="text" name="username" placeholder="" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item layui-inline">
+							<button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="user-query">
+								<i class="layui-icon layui-icon-search"></i>
+								query
+							</button>
+							<button type="reset" class="pear-btn pear-btn-md">
+								<i class="layui-icon layui-icon-refresh"></i>
+								reset
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="layui-card">
+			<div class="layui-card-body">
+				<table id="user-table" lay-filter="user-table"></table>
+			</div>
+		</div>
+
+		<script type="text/html" id="user-toolbar">
+			<button class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+		        <i class="layui-icon layui-icon-add-1"></i>
+		        add
+		    </button>
+		    <button class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+		        <i class="layui-icon layui-icon-delete"></i>
+		        delete
+		    </button>
+		</script>
+
+		<script type="text/html" id="user-bar">
+			<button class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit"><i class="layui-icon layui-icon-edit"></i></button>
+		    <button class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i></button>
+		</script>
+
+		<script type="text/html" id="user-enable">
+			<input type="checkbox" name="enable" value="{{ "{{d.id}}" }}" lay-skin="switch" lay-text="enabled|disabled" lay-filter="status" checked = "{{ "{{ d.enable == 0 ? 'true' : 'false' }}" }}">
+		</script>
+
+
+			<script type="text/html" id="user-createTime">
+			{{  "{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}"|safe }}
+		</script>
+
+        <script src="{{ url_for('static', filename='/admin/component/layui/layui.js') }}"></script>
+        <script src="{{ url_for('static', filename='/admin/component/pear/pear.js') }}"></script>
+		<script>
+			layui.use(['table', 'form', 'jquery','common'], function() {
+				let table = layui.table;
+				let form = layui.form;
+				let $ = layui.jquery;
+				let common = layui.common;
+
+				let MODULE_PATH = "operate/";
+
+				let cols = [
+					[{
+							type: 'checkbox'
+						},
+						{
+							title: 'username',
+							field: 'username',
+							align: 'center',
+							width: 100
+						},
+
+						{
+							title: 'enabled',
+							field: 'enable',
+							align: 'center',
+							templet: '#user-enable'
+						},
+						{
+							title: 'registed time',
+							field: 'create_at',
+							align: 'center',
+							templet: '#user-createTime'
+						},
+                        {
+							title: 'updated time',
+							field: 'update_at',
+							align: 'center',
+							templet: '#user-createTime'
+						},
+						{
+							title: 'option',
+							toolbar: '#user-bar',
+							align: 'center',
+							width: 130
+						}
+					]
+				]
+
+				table.render({
+					elem: '#user-table',
+					url: '{{ url_for('adminUser.table') }}',
+					page: true,
+					cols: cols,
+					skin: 'line',
+					toolbar: '#user-toolbar',
+					defaultToolbar: [{
+						title: 'refresh',
+						layEvent: 'refresh',
+						icon: 'layui-icon-refresh',
+					}, 'filter']
+				});
+
+				table.on('tool(user-table)', function(obj) {
+					if (obj.event === 'remove') {
+						window.remove(obj);
+					} else if (obj.event === 'edit') {
+						window.edit(obj);
+					}
+				});
+
+				table.on('toolbar(user-table)', function(obj) {
+					if (obj.event === 'add') {
+						window.add();
+					} else if (obj.event === 'refresh') {
+						window.refresh();
+					} else if (obj.event === 'batchRemove') {
+						window.batchRemove(obj);
+					}
+				});
+
+				form.on('submit(user-query)', function(data) {
+					table.reload('user-table', {
+						where: data.field
+					})
+					return false;
+				});
+
+				 form.on('switch(status)', function(data) {
+                var status = data.elem.checked ? 1 : 0;
+                var id = this.value;
+                var load = layer.load();
+
+
+                $.post('{{ url_for('adminUser.ustatus') }}', {
+                    status: status,
+                    id: id
+                }, function(res) {
+                    layer.close(load);
+                    if (res.code == 200) {
+                        layer.msg(res.msg, {
+                            icon: 1,
+                            time: 1500
+                        })
+                    } else {
+                        layer.msg(res.msg, {
+                            icon: 2,
+                            time: 1500
+                        }, function() {
+                            $(data.elem).prop('checked', !$(data.elem).prop('checked'));
+                            form.render()
+                        })
+                    }
+                })
+            });
+
+
+				window.add = function() {
+					layer.open({
+						type: 2,
+						title: 'create',
+						shade: 0.1,
+						area: ['500px', '400px'],
+						content: '{{ url_for('adminUser.insert') }}'
+					});
+				}
+
+				  window.edit = function(obj) {
+                layer.open({
+                    type: 2,
+                    title: 'edit',
+                    shade: 0.1,
+                    area: ['500px', '400px'],
+                    content: '/admin/user/edit/' + obj.data['id']
+                });
+            }
+
+            window.remove = function(obj) {
+                layer.confirm('are you sure delete selected user?', {
+                    icon: 3,
+                    title: 'hint'
+                }, function(index) {
+                    layer.close(index);
+                    let loading = layer.load();
+                   $.ajax({
+                url:'{{url_for('adminUser.delete')}}',
+                data:{id:obj.data['id']},
+                dataType: 'json',
+                type: 'POST',
+                success: function(res) {
+                    layer.close(loading);
+                     if(res && res.code==999){
+                        layer.msg(res.msg, {
+                            icon: 5,
+                            time: 2000,
+                        })
+                        return false;
+                    }else if (res.code==200) {
+                        layer.msg(res.msg, {
+                            icon: 1,
+                            time: 1000
+                        }, function() {
+                            obj.del();
+                        });
+                    } else {
+                        layer.msg(res.msg, {
+                            icon: 2,
+                            time: 1000
+                        });
+                    }
+                }
+            })
+                });
+            }
+
+				window.batchRemove = function(obj) {
+
+					var checkIds = common.checkField(obj,'userId');
+
+					if (checkIds === "") {
+						layer.msg("no data seleted", {
+							icon: 3,
+							time: 1000
+						});
+						return false;
+					}
+					var ids = []
+                    var hasCheck = table.checkStatus('user-table')
+                    var hasCheckData = hasCheck.data
+                    if (hasCheckData.length > 0) {
+                        $.each(hasCheckData, function (index, element) {
+                            ids.push(element.id)
+                        })
+                    }
+
+					layer.confirm('are you sure delete selected users?', {
+						icon: 3,
+						title: 'hint'
+					}, function(index) {
+						layer.close(index);
+						let loading = layer.load();
+						$.ajax({
+							url: "{{ url_for('adminUser.batchRemove') }}",
+                            data: {ids:ids},
+							{#dataType: 'json',#}
+							type: 'post',
+							success: function(res) {
+								 layer.close(loading);
+                     if(res && res.code==999){
+                        layer.msg(res.msg, {
+                            icon: 5,
+                            time: 2000,
+                        })
+                        return false;
+                    }else if (res.code==200) {
+                        layer.msg(res.msg, {
+                            icon: 1,
+                            time: 1000
+                        }, function() {
+                            table.reload('user-table');
+                        });
+                    } else {
+                        layer.msg(res.msg, {
+                            icon: 2,
+                            time: 1000
+                        });
+								}
+							}
+						})
+					});
+				}
+
+				window.refresh = function(param) {
+					table.reload('user-table');
+				}
+			})
+		</script>
+	</body>
+</html>
