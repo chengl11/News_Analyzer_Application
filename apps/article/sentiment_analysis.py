@@ -8,7 +8,7 @@ from google.cloud import language_v1
 # from google.cloud.language import types
 
 import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "asymmetric-rite-290701-2ca06c55e9e8.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "ec500a2-final-d38fcfb539dd.json"
 
 def print_result(annotations):
     result = []
@@ -18,9 +18,9 @@ def print_result(annotations):
     for index, sentence in enumerate(annotations.sentences):
         sentence_sentiment = sentence.sentiment.score
         print(
-            "Sentence {} has a sentiment score of {}".format(index, sentence_sentiment)
+            "Sentence {} has a sentiment score of {}".format(sentence.text.content, sentence_sentiment)
         )
-        result.append("Sentence {} has a sentiment score of {}".format(index, sentence_sentiment))
+        result.append("Sentence {} has a sentiment score of {}".format(sentence.text.content, sentence_sentiment))
 
     print(
         "Overall Sentiment: score of {} with magnitude of {}".format(score, magnitude)

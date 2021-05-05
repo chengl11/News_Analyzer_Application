@@ -1,6 +1,6 @@
 
 # News Analyzer
-Author: Lin Cheng
+Author: Lin Cheng, Yuhan Hu
 
 ## Product Mission
 Ingest and discover content to help journalist investigate stories
@@ -38,29 +38,23 @@ Ingest and discover content to help journalist investigate stories
         - uploadFile.html                                       **------// file page**
 - app.py                                                        **------// main file**
 
-## Steps
-### 1.Run 'python3 app.py runserver' and direct to User Center Page
-![Image of homepage1](img/homepage1.png)
-### 2.Click Register and redirect to Register Page
-![Image of registerpage](img/registerpage.png)
-### 3.Click subimit button and redirect to User Center Page
-### New user info will be added into MYSQL
+## Introduction
+### Run 'python3 app.py runserver' and direct to User Center Page
+![Image of homepage1](img/user-center.png)
+### Application Description Page
+![Image of homepage1](img/description.png)
+### Register Page
+![Image of registerpage](img/register.png)
+### MYSQL
 ![Image of MYSQL Workbench](img/MYSQL.png)
-### All Users that registered appears in a table
-![Image of homepage2](img/homepage2.png)
-### 4.Click Login and redirect to Login Page
-![Image of loginpage](img/loginpage.png)
-### 5.Click submit and redirect to File Page
-![Image of uploadpage1](img/uploadpage1.png)
-### 6.Upload PDF files and click submit, you will see the sentiment appears at the bottom
-![Image of uploadpage2](img/uploadpage2.png)
-### 7. Setup AWS EC2
-1. Add "Security Group", name it "news_analysis"
-2. Add "Key Pairs", name it "news_analysis_keys"
-3. Launch "Instance", set its "Security Group" and "Key Pairs"
-4. Transferring Files from laptop to Amazon instance:
-> $scp -i ~/Desktop/amazon.pem ~/Desktop/MS115.fa  ubuntu@ec2-54-166-128-20.compute-1.amazonaws.com:~/data/
-
+### Login Page
+![Image of loginpage](img/login.png)
+### News Feed Ingester Page
+![Image of uploadpage1](img/news-feed-ingester.png)
+### File Ingester Page
+![Image of uploadpage1](img/file-ingester.png)
+### Sentiment Analyzer
+![Image of uploadpage2](img/analyzer.png)
 
 ## pre-requirements install：  
 1. cd your-project

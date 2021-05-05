@@ -6,48 +6,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>user center</title>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="../style.css"> -->
+    <style type="text/css">
+        html{
+            height: 100%;
+            width: 100%;
+            background-color: #ededed;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        #body-header{
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            background-color:rgb(23, 102, 76);
+            padding-top:5px;
+            color:white;
+        }
+        #body-main{
+            height: 85%;
+            width: 100%;
+        }
+        #main-container{
+            display:flex;
+            flex-direction:row;
+            height: 100%;
+        }
+        #container-left{
+            width: 20%;
+            background-color: rgb(47, 209, 155);
+            text-align: center;
+            height: 100%;
+        }
+        #container-left nav{
+            margin: 40px 20px 10px 10px;
+            height: 90%;
+        }
+
+        .link{
+            height: 10%;
+            width: 95%;
+            color:white;
+            text-align: center;
+            display: inline-block;
+        }
+        .link:hover{
+            background-color: rgb(38, 173, 128);
+        }
+        .link:visited{
+            color:white;
+        }
+
+        #container-right{
+            width: 80%;
+            background-color:#f5f5f5; 
+            padding:0 10px 0 10px;
+        }
+        #container-right-top{
+            background-color: whitesmoke;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        #container-right-top h1{
+            margin: 0;
+        }
+
+        #user-table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+          #user-table td, #user-table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+          
+          #user-table tr:nth-child(even){background-color: #f2f2f2;}
+          
+          #user-table tr:hover {background-color: #ddd;}
+          
+          #user-table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+          }
+
+          input[type=text] {
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('https://static.runoob.com/images/mix/searchicon.png');
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+          }
+
+          #search-button{
+            display: inline-block;
+            vertical-align: middle;
+            height: 46px;
+            line-height: 46px;
+            border-color: rgb(47, 209, 155);
+            background-color: rgb(47, 209, 155);
+            margin-top: 10px;
+            border-radius: 2px;
+            border-width: 0;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+        }
+
+    
+      </style>
 </head>
 <body>
-    <div>
-        <h1>Home Page</h1>
-        <a href="{{ url_for('user.register') }}">Go to register page</a></br>
-        <a href="{{ url_for('user.login') }}">Go to login page</a></br>
-    </div>
-    <div>
-        <h1>All Users Information</h1>
-        Search
-        <input type="text" name="search" placeholder="Input search word">
-        <input type="button" value="search" id="search">
-        {% if users %}
-            <table border="1" cellspacing="0" width="50%">
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Datetime</th>
-                    <th>Operation</th>
-                </tr>
-                {% for user in users %}
-                    <tr>
-                        <th>{{loop.index}}</th>
-                        <th>{{user.username}}</th>
-                        <th>{{user.password}}</th>
-                        <th>{{user.rdatetime}}</th>
-                        <th>
-                            <a href="/delete?id={{ user.id }}">Delete</a>
-                        </th>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            <h1>No user now!</h1>
-        {% endif %}
-    </div>
+    <header id="body-header">
+        <h1 id="body-header-h1">User Center</h1>
+    </header>
+    <main id="body-main">
+        <div id="main-container">
+            <div id="container-left">
+                <nav>
+                    <a class="link" href="../">User Center</a></br>
+                    <a class="link" href="{{ url_for('user.register') }}">Register Page</a></br>
+                    <a class="link" href="{{ url_for('user.login') }}">Login Page</a></br>
+                    <a class="link" href="{{ url_for('user.sentimient_description') }}">Application Description Page</a></br>
+                </nav>
+            </div>
+            <div id="container-right">
+                <div id="container-right-top">
+                    <h1>All Users Information</h1>
+                    <input type="text" name="search" placeholder="Input Username">
+                    <input type="button" value="search" id="search-button">
+                </div>
+                <div id="container-right-mid">
+                    {% if users %}
+                    <table  id="user-table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Datetime</th>
+                            <th>Operation</th>
+                        </tr>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{loop.index}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.password}}</td>
+                                <td>{{user.rdatetime}}</td>
+                                <td>
+                                    <a href="/delete?id={{ user.id }}">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    {% else %}
+                        <h1>No user now!</h1>
+                    {% endif %}
+                </div>
+                <div id="container-right-bottom"></div>
+            </div>
+        </div>
+
+    </main>
+    <footer id="body-footer">
+        
+    </footer>
     <script>
         $('#search').click(function(){
             let content = $("input[name='search']").val();
             //alert(content);
-            location.href = '{{ url_for('user.search') }}?search='+content;
+            location.href = "{{ url_for('user.search') }}?search="+content;
         })
     </script>
 </body>

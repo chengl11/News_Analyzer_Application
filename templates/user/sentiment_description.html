@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analyzer Application Description Page</title>
+    <style type="text/css">
+        html{
+            height: 100%;
+            width: 100%;
+            background-color: #ededed;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        #body-header{
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            background-color:rgb(23, 102, 76);
+            padding-top:5px;
+            color:white;
+        }
+        #body-main{
+            height: 85%;
+            width: 100%;
+        }
+        #main-container{
+            display:flex;
+            flex-direction:row;
+            height: 100%;
+        }
+        #container-left{
+            width: 20%;
+            background-color: rgb(47, 209, 155);
+            text-align: center;
+            height: 100%;
+        }
+        #container-left nav{
+            margin: 40px 20px 10px 10px;
+            height: 90%;
+        }
+        .link{
+            height: 10%;
+            width: 95%;
+            display: inline-block;
+            color:white;
+        }
+        .link:hover{
+            background-color: rgb(38, 173, 128);
+        }
+        .link:visited{
+            color:white;
+        }
+
+        #container-right{
+            width: 80%;
+            background-color:white; 
+            padding:0 10px 0 10px;
+        }
+        #container-right-top{
+            background-color: whitesmoke;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        #container-right-top h1{
+            margin: 0;
+        }
+
+        #example-table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+          #example-table td, #example-table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+          
+          #example-table tr:nth-child(even){background-color: #f2f2f2;}
+          
+          #example-table tr:hover {background-color: #ddd;}
+          
+          #example-table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+          }
+
+    
+      </style>
+</head>
+<body>
+    <header id="body-header">
+        <h1 id="body-header-h1"> Sentiment Analyzer Application Description Page</h1>
+    </header>
+    <main id="body-main">
+        <div id="main-container">
+            <div id="container-left">
+                <nav>
+                    <a class="link" href="../">User Center</a>
+                    <a class="link" href="/register">Register Page</a>
+                    <a class="link" href="/login">Login Page</a>
+                    <a class="link" href="{{ url_for('user.sentimient_description') }}">Application Description Page</a></br>
+                </nav>
+            </div>
+        
+
+            <div id="container-right">
+                <div id="container-right-top"></div>
+                <div>
+                    <h2>Interpreting Sentiment Analysis Values</h1>
+                    <p>The score of a document's sentiment indicates the overall emotion of a document. The magnitude of a document's sentiment indicates how much emotional content is present within the document, and this value is often proportional to the length of the document.</p>
+                    <p>It is important to note that the Natural Language API indicates differences between positive and negative emotion in a document, but does not identify specific positive and negative emotions. For example, "angry" and "sad" are both considered negative emotions. However, when the Natural Language API analyzes text that is considered "angry", or text that is considered "sad", the response only indicates that the sentiment in the text is negative, not "sad" or "angry".</p>
+                    <p>A document with a neutral score (around 0.0) may indicate a low-emotion document, or may indicate mixed emotions, with both high positive and negative values which cancel each out. Generally, you can use magnitude values to disambiguate these cases, as truly neutral documents will have a low magnitude value, while mixed documents will have higher magnitude values.</p>
+                    <p>When comparing documents to each other (especially documents of different length), make sure to use the magnitude values to calibrate your scores, as they can help you gauge the relevant amount of emotional content.</p>
+                    <p>The chart below shows some sample values and how to interpret them:</p>
+                </div>
+                <div>
+                    <table id="example-table">
+                        <tr>
+                            <th>Sentiment	</th>
+                            <th>Sample Values</th>
+                          </tr>
+                          <tr>
+                            <td>Clearly Positive*	</td>
+                            <td>"score": 0.8, "magnitude": 3.0</td>
+                          </tr>
+                          <tr>
+                            <td>Clearly Negative*</td>
+                            <td>"score": -0.6, "magnitude": 4.0</td>
+                          </tr>
+                          <tr>
+                            <td>Neutral</td>
+                            <td>"score": 0.1, "magnitude": 0.0</td>
+                          </tr>
+                          <tr>
+                            <td>Mixed</td>
+                            <td>"score": 0.0, "magnitude": 4.0</td>
+                          </tr>
+                    </table>
+                </div>
+
+                <div id="container-right-mid">
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

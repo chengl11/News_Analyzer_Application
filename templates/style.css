@@ -1,0 +1,59 @@
+html{
+    height: 100%;
+    width: 100%;
+    background-color: #ededed;
+}
+body{
+    height: 100%;
+    width: 100%;
+}
+#body-header{
+    height: 10%;
+    text-align: center;
+    background-color:rgb(23, 102, 76);
+    padding-top:5px;
+    color:white;
+}
+#body-main{
+    height: 85%;
+}
+#main-container{
+    display:flex;
+    flex-direction:row;
+    height: 100%;
+}
+#container-left{
+    width: 25%;
+    background-color: rgb(47, 209, 155);
+    text-align: center;
+    height: 100%;
+}
+#container-left nav{
+    margin: 10px 20px 10px 10px;
+    height: 90%;
+}
+.link{
+    height: 10%;
+    width: 95%;
+    display: inline-block;
+    color:white;
+}
+.link:hover{
+    background-color: rgb(38, 173, 128);
+}
+.link:visited{
+    color:white;
+}
+
+#container-right{
+    width: 85%;
+    background-color:white; 
+    margin:10px 10px 10px 10px;
+}
+#container-right-top{
+    background-color: whitesmoke;
+    margin-bottom: 10px;
+}
+#container-right-top h1{
+    margin: 0;
+}

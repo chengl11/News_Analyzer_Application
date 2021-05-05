@@ -4,18 +4,163 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- <link rel="stylesheet" type="text/css" href="../../static/css/style.css"> -->
+    <style type="text/css">
+        html{
+            height: 100%;
+            width: 100%;
+            background-color: #ededed;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        #body-header{
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            background-color:rgb(23, 102, 76);
+            padding-top:5px;
+            color:white;
+        }
+        #body-main{
+            height: 85%;
+            width: 100%;
+        }
+        #main-container{
+            display:flex;
+            flex-direction:row;
+            height: 100%;
+        }
+        #container-left{
+            width: 20%;
+            background-color: rgb(47, 209, 155);
+            text-align: center;
+            height: 100%;
+        }
+        #container-left nav{
+            margin: 40px 20px 10px 10px;
+            height: 90%;
+        }
+        .link{
+            height: 10%;
+            width: 95%;
+            display: inline-block;
+            color:white;
+        }
+        .link:hover{
+            background-color: rgb(38, 173, 128);
+        }
+        .link:visited{
+            color:white;
+        }
+
+        #container-right{
+            height: 100%;
+            width: 80%;
+            background-color:#f5f5f5; 
+            padding:0 10px 0 10px;
+        }
+        #container-right-top{
+            background-color: whitesmoke;
+            margin-bottom: 10px;
+        }
+        #container-right-top h1{
+            margin: 0;
+        }
+
+        #container-right-container{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #login_frame{
+            height: 70%;
+            width: 50%;
+            background-color: white;
+            border-radius: 12px;
+        }
+        form{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form div.row{
+            margin: 10px;
+        }
+
+        #submitbutton{
+            display: inline-block;
+            vertical-align: middle;
+            height: 46px;
+            line-height: 46px;
+            border-color: rgb(47, 209, 155);
+            background-color: rgb(47, 209, 155);
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 2px;
+            border-width: 0;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+        }
+
+    
+      </style>
+    
 </head>
 <body>
-    <h1> Login Page</h1>
-    <a href="../">User Center</a>
-    
-    <div id="login_frame">
-        <form action='{{ url_for('user.login') }}' method="post" >
-            <p><label class="label_input">Username </label><input type="text" name="username" id="username" class="text_field"/></p>
-            <p><label class="label_input">Password </label><input type="text" name="password" id="password" class="text_field"/></p>
-            <p><input type="submit" name="submitbutton" id="submitbutton"/></p>
-            <p>{{msg}}</p>
-        </form>
-    </div>
+    <header id="body-header">
+        <h1 id="body-header-h1"> Login Page</h1>
+    </header>
+    <main id="body-main">
+        <div id="main-container">
+            <div id="container-left">
+                <nav>
+                    <a class="link" href="../">User Center</a>
+                    <a class="link" href="/register">Register Page</a>
+                    <a class="link" href="login">Login Page</a>
+                    <a class="link" href="{{ url_for('user.sentimient_description') }}">Application Description Page</a></br>
+                </nav>
+            </div>
+            <div id="container-right">
+
+                <div id="container-right-container">
+                    <div id="login_frame">
+                        <form action='{{ url_for('user.login') }}' method="post" >
+                            <div class="row">
+                                <div class="col-25">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="username" id="username" class="text_field"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-25">
+                                    <label>Password</label>
+                                </div>
+                                <div class="col-75">
+                                    <input type="text" name="password" id="password" class="text_field"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input type="submit" name="submitbutton" id="submitbutton" value="Login"/>
+                            </div>
+                            <p>{{msg}}</p>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer id="body-footer"></footer>
 </body>
 </html>

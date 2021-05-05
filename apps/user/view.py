@@ -110,6 +110,15 @@ def file_upload():
             # txt_file.save("static/files/%s" % txt_file)
             result_list = analyze(all_texts[0])
             #print(result_list)
-            return render_template("user/fileUpload.html", msg="upload file {} success".format(filename), result=result_list, filename=filename)
+            return render_template("user/fileUpload.html", msg="upload file {} success".format(filename), result=result_list, filename=filename, all_texts=all_texts[0])
 
     return render_template("user/fileUpload.html")
+
+@user_bp.route('/sentimient_description')
+def sentimient_description():
+    return render_template('user/sentiment_description.html')
+
+
+@user_bp.route('/news_feed_ingester')
+def news_feed_ingester():
+    return render_template('user/news_feed_ingester.html')

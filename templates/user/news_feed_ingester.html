@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <!-- <link rel="stylesheet" type="text/css" href="../../static/css/style.css"> -->
+    <title>Upload File Page</title>
     <style type="text/css">
         html{
             height: 100%;
@@ -58,50 +57,27 @@
         }
 
         #container-right{
-            height: 100%;
             width: 80%;
-            background-color:#f5f5f5; 
+            background-color:white; 
             padding:0 10px 0 10px;
         }
         #container-right-top{
             background-color: whitesmoke;
+            margin-top: 40px;
             margin-bottom: 10px;
         }
         #container-right-top h1{
             margin: 0;
         }
 
-        #container-right-container{
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #register_frame{
-            height: 70%;
-            width: 50%;
-            background-color: white;
-            border-radius: 12px;
-        }
-        form{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        form div.row{
-            margin: 10px;
-        }
-
-        #submitbutton{
+        #commitbutton{
             display: inline-block;
             vertical-align: middle;
             height: 46px;
             line-height: 46px;
             border-color: rgb(47, 209, 155);
             background-color: rgb(47, 209, 155);
-            width: 100%;
+            width: 8%;
             margin-top: 10px;
             border-radius: 2px;
             border-width: 0;
@@ -112,14 +88,33 @@
             position: relative;
         }
 
+        #fileUpload_frame{
+            border: rgb(23, 102, 76) 3px solid;
+        }
 
+        #file-content{
+            border:rgb(23, 102, 76) 3px solid;
+            margin-bottom: 10px;
+        }
+        #file-content-header{
+            text-align: center;
+        }
 
-    
+        #file-name{
+            text-align: center;
+        }
+        #sentiment-content{
+            border:rgb(23, 102, 76) 3px solid;
+        }
+        #sentiment-content-header{
+            text-align: center;
+        }
+
       </style>
 </head>
 <body>
     <header id="body-header">
-        <h1 id="body-header-h1"> Register Page</h1>
+        <h1 id="body-header-h1">News Feed Ingester Page</h1>
     </header>
     <main id="body-main">
         <div id="main-container">
@@ -129,50 +124,55 @@
                     <a class="link" href="/register">Register Page</a>
                     <a class="link" href="login">Login Page</a>
                     <a class="link" href="{{ url_for('user.sentimient_description') }}">Application Description Page</a></br>
+                    <a class="link" href="/file_upload">File Ingester</a></br>
+                    <a class="link" href="/news_feed_ingester">News Feed Ingester</a></br>
                 </nav>
             </div>
-
+        
 
             <div id="container-right">
-                <div id="container-right-container">
-                    <div id="register_frame">
-                        <form action='{{ url_for('user.register') }}' method="post" >
-                            <div class="row">
-                                <div class="col-25">
-                                  <label>Username</label>
-                                </div>
-                                <div class="col-75">
-                                  <input type="text" name="username" id="username" class="text_field"/>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-25">
-                                  <label>Password</label>
-                                </div>
-                                <div class="col-75">
-                                  <input type="text" name="password" id="password" class="text_field"/>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-25">
-                                  <label>Repassword</label>
-                                </div>
-                                <div class="col-75">
-                                  <input type="text" name="repassword" id="repassword" class="text_field"/>
-                                </div>
-                              </div>
-                            
-                              <div class="row">
-                                <input type="submit" name="submitbutton" id="submitbutton" value="Register"/>
-                              </div>
-                            <p>{{msg}}</p>
-                        </form>
+                <div id="container-right-top">
+                    <div id="fileUpload_frame">
+                        <div class="row">
+                            <div class="col-25">
+                                <label>URL</label>
+                            </div>
+                            <div class="col-75">
+                                <input type="text" name="username" id="username" class="text_field"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="submit" name="commitbutton" id="commitbutton" value="Commit"/>
+                        </div>
+                        <p>{{msg}}</p>
                     </div>
                 </div>
-
+                <div id="container-right-mid">
+                    <div id="file-content">
+                        <h2 id="file-content-header">Article Content</h2>
+                        <div id="file-name">
+                            <h2>{{filename}}</h2>
+                        </div>
+                        <div id="file-text">
+                            {{all_texts}}
+                        </div>
+                    </div>
+                    <div id="sentiment-content">
+                        <h2 id="sentiment-content-header">Sentiment Analyzer Content</h2>
+                        {% for line in result %}
+                            <p>{{ line }}</p>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
             </div>
+
         </div>
     </main>
-    <footer id="body-footer"></footer>
+    <script>
+        let file_content = document.getElementById("file-content");
+        console.log(file_content.innerText);
+        console.log(typeof file_content.innerText);
+    </script>
 </body>
 </html>
